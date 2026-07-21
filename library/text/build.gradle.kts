@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlinx.atomicfu)
 }
 
 kotlin {
@@ -16,6 +17,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.library.core)
+            api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.core)
         }
     }
