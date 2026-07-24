@@ -3,25 +3,36 @@ package io.github.numq.krope.text
 import kotlin.time.Clock
 import kotlin.time.Instant
 
+/**
+ * Represents an applied modification (delta) to the text buffer.
+ * It contains both the structural change ([Data]) and the [revision] it applies to.
+ */
 sealed interface TextEdit {
     val revision: TextRevision
 
     val data: Data
 
+    /** Represents a change initiated by an active user. */
     data class User(override val revision: TextRevision, override val data: Data) : TextEdit
 
+    /** Represents a change initiated by the system (e.g., formatting tools, async updates). */
     data class System(override val revision: TextRevision, override val data: Data) : TextEdit
 
+    /** Translates this applied edit back into an actionable [TextOperation]. */
     fun toSystemOperation(snapshot: TextSnapshot): TextOperation.System = TextOperation.System(
         revision = snapshot.revision, data = data.toOperationData(snapshot = snapshot)
     )
 
+    /** Generates the exact inverse of this edit (useful for Undo/Redo implementations). */
     fun invert(): TextEdit = when (this) {
         is User -> User(revision = revision, data = data.invert())
 
         is System -> System(revision = revision, data = data.invert())
     }
 
+    /**
+     * Contains the raw delta metrics of an operation, including positions and byte offsets.
+     */
     sealed interface Data {
         val startByte: Int
 
@@ -37,6 +48,7 @@ sealed interface TextEdit {
 
         val instant: Instant
 
+        /** Translates this delta data back into an operation payload. */
         fun toOperationData(snapshot: TextSnapshot): TextOperation.Data = when (this) {
             is Single.Insert -> TextOperation.Data.Single.Insert(
                 position = startPosition.coerceIn(snapshot), text = insertedText
@@ -59,6 +71,7 @@ sealed interface TextEdit {
             })
         }
 
+        /** True if the operation caused zero physical change to the text. */
         fun isEffectivelyEmpty(): Boolean = when (this) {
             is Single.Insert -> insertedText.isEmpty()
 
@@ -69,6 +82,7 @@ sealed interface TextEdit {
             is Batch -> singles.all(Single::isEffectivelyEmpty)
         }
 
+        /** Reverses the metrics (e.g., turns an Insert into a Delete). */
         fun invert(): Data = when (this) {
             is Single.Insert -> Single.Delete(
                 startPosition = startPosition,
@@ -157,6 +171,7 @@ sealed interface TextEdit {
             }
         }
 
+        /** Represents multiple edits applied atomically. */
         data class Batch(val singles: List<Single>) : Data {
             init {
                 require(singles.isNotEmpty()) { "Batch edit cannot be empty" }

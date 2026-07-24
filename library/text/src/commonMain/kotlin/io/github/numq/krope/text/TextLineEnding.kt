@@ -1,8 +1,19 @@
 package io.github.numq.krope.text;
 
+/**
+ * Defines the standard line ending characters used across different operating systems.
+ */
 enum class TextLineEnding {
-    LF, CRLF, CR;
+    /** Unix / Linux / macOS (\n) */
+    LF,
 
+    /** Windows (\r\n) */
+    CRLF,
+
+    /** Classic macOS (\r) */
+    CR;
+
+    /** Returns the string representation of the line ending. */
     val text: String
         get() = when (this) {
             LF -> "\n"
@@ -12,9 +23,17 @@ enum class TextLineEnding {
             CR -> "\r"
         }
 
+    /** Result of analyzing a string to detect its line endings. */
     data class DetectionResult(val dominant: TextLineEnding, val isMixed: Boolean)
 
     companion object {
+        /**
+         * Analyzes a given text block to determine its primary line ending format.
+         * Falls back to the platform's default line ending if none are found.
+         *
+         * @param text The text to scan.
+         * @return A [DetectionResult] containing the primary format and whether multiple formats were found.
+         */
         fun analyze(text: String): DetectionResult {
             var lfCount = 0
 
@@ -26,7 +45,7 @@ enum class TextLineEnding {
 
             var i = 0
 
-            val n = minOf(text.length, 8192)
+            val n = minOf(text.length, 8192) // Scan a reasonable chunk
 
             while (i < n) {
                 when (text[i]) {
