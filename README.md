@@ -110,8 +110,11 @@ launch {
     buffer.data.collect { editData ->
         when (editData) {
             is TextEdit.Data.Single.Insert -> println("Inserted at ${editData.startPosition}")
+          
             is TextEdit.Data.Single.Delete -> println("Deleted from ${editData.startPosition}")
+          
             is TextEdit.Data.Single.Replace -> println("Replaced '${editData.oldText}' with '${editData.newText}'")
+          
             is TextEdit.Data.Batch -> println("Batch of ${editData.singles.size} edits")
         }
     }
@@ -125,10 +128,7 @@ println(snapshot.maxLineLength) // 11
 
 // 4. Edit
 buffer.insert(TextPosition(0, 5), " Beautiful") // "Hello Beautiful World"
-buffer.replace(
-    TextRange(TextPosition(0, 6), TextPosition(0, 15)),
-    "Wonderful"
-) // "Hello Wonderful World"
+buffer.replace(TextRange(TextPosition(0, 6), TextPosition(0, 15)), "Wonderful") // "Hello Wonderful World"
 buffer.delete(TextRange(TextPosition(0, 5), TextPosition(0, 16))) // "Hello World"
 
 // 5. Batch edits
@@ -182,19 +182,19 @@ texts, rope's structural sharing dominates.
 
 ---
 
-## Gradle Installation (TBD 🚧)
+## Gradle Installation
 
 The project is structured as a KMP library with multiple modules. Add the desired module to your `build.gradle.kts`:
 
 ```kotlin
 // For core rope structures
-implementation("io.github.numq.krope:core:VERSION")
+implementation("io.github.numq.krope:core:1.0.0")
 // For the full TextBuffer API
-implementation("io.github.numq.krope:text:VERSION")
-// For diff support
-implementation("io.github.numq.krope:diff:VERSION")
-// For IO support
-implementation("io.github.numq.krope:io:VERSION")
+implementation("io.github.numq.krope:text:1.0.0")
+// For diff support (Coming soon 🚧)
+implementation("io.github.numq.krope:diff:1.0.0")
+// For IO support (Coming soon 🚧)
+implementation("io.github.numq.krope:io:1.0.0")
 ```
 
 ---
