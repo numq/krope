@@ -110,11 +110,11 @@ launch {
     buffer.data.collect { editData ->
         when (editData) {
             is TextEdit.Data.Single.Insert -> println("Inserted at ${editData.startPosition}")
-          
+
             is TextEdit.Data.Single.Delete -> println("Deleted from ${editData.startPosition}")
-          
+
             is TextEdit.Data.Single.Replace -> println("Replaced '${editData.oldText}' with '${editData.newText}'")
-          
+
             is TextEdit.Data.Batch -> println("Batch of ${editData.singles.size} edits")
         }
     }
@@ -184,17 +184,29 @@ texts, rope's structural sharing dominates.
 
 ## Gradle Installation
 
-The project is structured as a KMP library with multiple modules. Add the desired module to your `build.gradle.kts`:
+The project is hosted on Maven Central. Make sure your project repositories include it:
 
 ```kotlin
-// For core rope structures
-implementation("io.github.numq.krope:core:1.0.0")
-// For the full TextBuffer API
-implementation("io.github.numq.krope:text:1.0.0")
-// For diff support (Coming soon 🚧)
-implementation("io.github.numq.krope:diff:1.0.0")
-// For IO support (Coming soon 🚧)
-implementation("io.github.numq.krope:io:1.0.0")
+repositories {
+  mavenCentral()
+}
+```
+
+Add the desired module to your `build.gradle.kts` dependencies block:
+
+```kotlin
+dependencies {
+    // Core rope data structure
+    implementation("io.github.numq:krope-core:1.0.0")
+
+    // Full TextBuffer API (depends on core)
+    implementation("io.github.numq:krope-text:1.0.0")
+
+    // Future modules (Coming soon 🚧)
+    // implementation("io.github.numq:krope-diff:1.0.0")
+    // implementation("io.github.numq:krope-io:1.0.0")
+}
+
 ```
 
 ---
