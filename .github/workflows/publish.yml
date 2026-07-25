@@ -23,9 +23,10 @@ jobs:
         with:
           cache-disabled: true
 
-      - name: Grant execute permission and run gradlew
+      - name: Publish and Release to Maven Central
         run: |
           chmod +x gradlew
+          ls -la gradlew
           ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
