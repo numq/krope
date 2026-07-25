@@ -1,3 +1,7 @@
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.numq/krope-core)](https://central.sonatype.com/artifact/io.github.numq/krope-core)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.3.21-blue.svg)](https://kotlinlang.org)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+
 # Krope — High-Performance Rope-Based Text Buffer for Kotlin Multiplatform
 
 **Krope** is a Kotlin Multiplatform library providing an immutable, persistent text buffer backed by a **Rope** data
@@ -188,7 +192,7 @@ The project is hosted on Maven Central. Make sure your project repositories incl
 
 ```kotlin
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 ```
 
