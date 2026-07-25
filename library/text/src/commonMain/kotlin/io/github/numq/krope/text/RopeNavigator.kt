@@ -3,7 +3,7 @@ package io.github.numq.krope.text
 import io.github.numq.krope.core.Rope
 import kotlin.math.max
 
-object RopeNavigator {
+internal object RopeNavigator {
     const val LINE_BREAK_LENGTH = 1
 
     fun calculateLineLength(rope: Rope, line: Int) = when {
