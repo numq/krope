@@ -47,6 +47,10 @@ tasks.withType<Test>().configureEach {
 }
 
 mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+
     coordinates(groupId = "io.github.numq", artifactId = "krope-core", version = project.version.toString())
 
     pom {
