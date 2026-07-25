@@ -8,6 +8,7 @@ kotlinx-atomicfu = "0.29.0"
 kotlinx-benchmark = "0.4.17"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.11.0"
+maven-publish = "0.37.0"
 
 [libraries]
 kotlinx-benchmark-runtime = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime", version.ref = "kotlinx-benchmark" }
@@ -26,3 +27,4 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinx-atomicfu" }
 kotlinx-benchmark = { id = "org.jetbrains.kotlinx.benchmark", version.ref = "kotlinx-benchmark" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

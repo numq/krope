@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlinx.atomicfu)
+    alias(libs.plugins.maven.publish)
 }
 
 kotlin {
@@ -45,4 +46,34 @@ atomicfu {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+}
+
+mavenPublishing {
+    coordinates(groupId = "io.github.numq", artifactId = "krope-text", version = project.version.toString())
+
+    pom {
+        name.set("Krope Text")
+        description.set("High-Performance Rope-Based Text Buffer for Kotlin Multiplatform")
+        url.set("https://github.com/numq/krope")
+
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("numq")
+                name.set("numq")
+            }
+        }
+
+        scm {
+            url.set("https://github.com/numq/krope")
+            connection.set("scm:git:git://github.com/numq/krope.git")
+            developerConnection.set("scm:git:ssh://git@github.com/numq/krope.git")
+        }
+    }
 }
