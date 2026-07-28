@@ -213,14 +213,14 @@ Add the desired module to your `build.gradle.kts` dependencies block:
 ```kotlin
 dependencies {
     // Core rope data structure
-    implementation("io.github.numq:krope-core:1.0.0")
+    implementation("io.github.numq:krope-core:1.0.1")
 
     // Full TextBuffer API (depends on core)
-    implementation("io.github.numq:krope-text:1.0.0")
+    implementation("io.github.numq:krope-text:1.0.1")
 
     // Future modules (Coming soon 🚧)
-    // implementation("io.github.numq:krope-diff:1.0.0")
-    // implementation("io.github.numq:krope-io:1.0.0")
+    // implementation("io.github.numq:krope-diff:1.0.1")
+    // implementation("io.github.numq:krope-io:1.0.1")
 }
 
 ```
