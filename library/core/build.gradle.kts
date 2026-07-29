@@ -55,13 +55,14 @@ mavenPublishing {
 
     pom {
         name.set("Krope Core")
-        description.set("High-performance Rope data structure for Kotlin Multiplatform")
+        description.set("High-Performance Rope Data Structure for Kotlin Multiplatform")
         url.set("https://github.com/numq/krope")
 
         licenses {
             license {
                 name.set("The Apache License, Version 2.0")
                 url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("repo")
             }
         }
 
@@ -69,6 +70,7 @@ mavenPublishing {
             developer {
                 id.set("numq")
                 name.set("numq")
+                url.set("https://github.com/numq")
             }
         }
 
